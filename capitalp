@@ -1,0 +1,71 @@
+# Kibo - Future Proof With Python
+# Final Project Sample 
+# author: Matthew H
+import random
+
+print("Welcome to GUESS THE CAPITAL")
+print()
+print("Do you have what it takes to be the winner?")
+print()
+print("Let us find out!")
+
+user_input = input("Press ENTER to CONTINUE or type HELP to see INSTRUCTIONS: ")
+
+if user_input.upper() == "HELP":
+  print("You are to enter A, B, C OR D to select an answer! \n ""\nFor Example: \nWhat is the capital of Nigeria? \nA. Lagos \nB. Abuja \nC. Warri \nD. Kano")
+  print("Answer: B \nCORRECT!!!")
+  commence = input("\nNow You are good to go! \nPress ENTER to CONTINUE")
+  if commence == "":
+    print("Let us COMMENCE! \n")
+  else:
+    print("Press ENTER!!")
+
+elif user_input == "":
+  print("Let us COMMENCE! \n")
+else:
+  print("Wrong Input, Retry!!")
+
+#countries and respective capitals in arrays  
+countries = ["Indonesia", "Malaysia", "Austria", "Cameroon", "Colombia", "Jamaica", "Morocco", "Bolivia", "Canada", "Belgium", "Spain", "Australia", "Poland", "Chile", "Egypt", "Ghana", "Argentina", "Croatia", "Brazil", "France"]
+
+capitals = ["Jakarta", "Kuala Lumpur", "Vienna", "Yaounde", "Bogota", "Kingston", "Rabat", "La Paz", "Ottawa", "Brussels", "Madrid", "Canberra", "Warsaw", "Santiago", "Cairo", "Accra", "Bueno Aires", "Zagreb", "Brasilla", "Paris", "Banjul", "Pilikir", "Roseau", "Oslo", "Windhoek", "Valetta", "Beirut", "Gitega", "Manila", "Lima", "Sofia", "Dhaka", "Doha"]
+
+def ask_question(country):
+  print(f"What is the capital of {countries[country]}? ")
+  random_options = random.sample(range(33), 4)
+
+  # Add the correct answer if it does not exist in random options
+  if not country in random_options:
+    answer_position = random.randint(0,3)
+    random_options[answer_position] = country
+
+  for index in range(4):
+    option = random_options[index]
+    print(option_labels[index] + ". " + capitals[option])
+
+  user_answer = input("Answer: ").upper()
+  if user_answer in option_labels:
+    answer_index = option_labels.index(user_answer)
+
+    if random_options[answer_index] == country:
+      return 1
+  return 0
+
+def show_score(final_score):
+  print (f"Your final score is {final_score}%")
+  if final_score > 50 and final_score < 70:
+    print("Good Performance, but you can do better!")
+  elif final_score > 70 and final_score < 100:
+    print("Excellent Performance! Keep it up!")
+  elif final_score == 100:
+    print("PERFECT SCORE! You are AWESOME!!")
+  else: 
+    print("Not Impressive Enough, You need to do better!")
+
+# Actual test 
+score = 0
+random_countries = random.sample(range(20), 10)
+option_labels = ["A", "B", "C", "D"]
+for country in random_countries:
+  score += ask_question(country)
+show_score(score * 10)
